@@ -66,6 +66,11 @@ export class NotificationService {
   ): Promise<void> {
     const config = action.config;
 
+    const validChannels = Object.values(NotificationChannel) as string[];
+    if (channel !== undefined && !validChannels.includes(channel)) {
+      throw new Error(`Unsupported notification channel: ${channel}`);
+    }
+
     switch (channel) {
       case NotificationChannel.FEISHU: {
         const webhookUrl =

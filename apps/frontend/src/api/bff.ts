@@ -1,6 +1,7 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import { useAuthStore } from '@/stores/auth.store';
+import { router } from '@/router';
 
 const bff = axios.create({
   baseURL: '/api/v1',
@@ -30,7 +31,7 @@ bff.interceptors.response.use(
     if (error.response?.status === 401) {
       const authStore = useAuthStore();
       authStore.logout();
-      window.location.href = '/login';
+      router.push('/login');
     }
     return Promise.reject(error);
   },
