@@ -10,7 +10,7 @@ export function getDatabaseConfig(configService: ConfigService): TypeOrmModuleOp
     password: configService.get<string>('DB_PASSWORD', 'sentinel_pass'),
     database: configService.get<string>('DB_DATABASE', 'sentinel_db'),
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-    synchronize: configService.get<string>('DB_SYNCHRONIZE', 'true') === 'true',
+    synchronize: configService.get<string>('DB_SYNCHRONIZE', 'false') === 'true',
     logging: configService.get<string>('DB_LOGGING', 'false') === 'true',
     charset: 'utf8mb4',
     timezone: 'Z',

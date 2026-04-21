@@ -46,16 +46,16 @@ export class IngestionService {
 
     for (const adapter of adapters) {
       try {
-        this.logger.log(`Fetching from adapter: ${adapter['config'].name}`);
+        this.logger.log(`Fetching from adapter: ${adapter.sourceName}`);
         const items = await adapter.fetch();
         const result = await this.saveItems(items);
         saved += result.saved;
         skipped += result.skipped;
-        this.logger.log(`Adapter ${adapter['config'].name}: saved=${result.saved}, skipped=${result.skipped}`);
+        this.logger.log(`Adapter ${adapter.sourceName}: saved=${result.saved}, skipped=${result.skipped}`);
       } catch (err) {
         errors++;
         this.logger.error(
-          `Adapter ${adapter['config'].name} failed: ${err instanceof Error ? err.message : String(err)}`,
+          `Adapter ${adapter.sourceName} failed: ${err instanceof Error ? err.message : String(err)}`,
         );
       }
     }

@@ -95,7 +95,7 @@ Copy `.env.example` to `.env` and configure:
 
 ### Database Migration (production)
 
-In production, disable `DB_SYNCHRONIZE=true` and use TypeORM migrations:
+In production, set `DB_SYNCHRONIZE=false` and use TypeORM migrations:
 
 ```bash
 cd apps/backend

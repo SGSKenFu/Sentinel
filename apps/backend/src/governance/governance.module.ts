@@ -16,10 +16,16 @@ import { GovernanceController } from './governance.controller';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET', 'fallback_secret_change_me'),
-        signOptions: { expiresIn: configService.get<string>('JWT_EXPIRES_IN', '7d') },
-      }),
+      useFactory: (configService: ConfigService) => {
+        const secret = configService.get<string>('JWT_SECRET');
+        if (!secret) {
+          throw new Error('JWT_SECRET environment variable must be configured');
+        }
+        return {
+          secret,
+          signOptions: { expiresIn: configService.get<string>('JWT_EXPIRES_IN', '7d') },
+        };
+      },
       inject: [ConfigService],
     }),
     ConfigModule,

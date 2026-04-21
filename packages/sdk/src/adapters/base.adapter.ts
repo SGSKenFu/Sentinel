@@ -17,6 +17,14 @@ export abstract class BaseAdapter {
 
   abstract fetch(): Promise<CrawledItemDto[]>;
 
+  get sourceName(): string {
+    return this.config.name;
+  }
+
+  get sourceId(): string {
+    return this.config.sourceId;
+  }
+
   protected buildFingerprint(url: string): string {
     return DeduplicationService.fingerprintFromUrl(url);
   }

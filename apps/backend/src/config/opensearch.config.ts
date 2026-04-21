@@ -5,6 +5,7 @@ export function createOpenSearchClient(configService: ConfigService): Client {
   const node = configService.get<string>('OPENSEARCH_NODE', 'http://localhost:9200');
   const username = configService.get<string>('OPENSEARCH_USERNAME', '');
   const password = configService.get<string>('OPENSEARCH_PASSWORD', '');
+  const sslVerify = configService.get<string>('OPENSEARCH_SSL_VERIFY', 'true') !== 'false';
 
   return new Client({
     node,
@@ -13,7 +14,7 @@ export function createOpenSearchClient(configService: ConfigService): Client {
         ? { username, password }
         : undefined,
     ssl: {
-      rejectUnauthorized: false,
+      rejectUnauthorized: sslVerify,
     },
   });
 }
