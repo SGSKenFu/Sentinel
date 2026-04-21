@@ -1,0 +1,11 @@
+{
+  "name": "@sentinel/sdk",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@sentinel/types": "*",
+    "axios": "^1.6.0",
+    "axios-retry": "^4.0.0"
+  }
+}
